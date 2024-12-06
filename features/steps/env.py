@@ -17,7 +17,7 @@ class Endpoints:
         self.BASE_URL = "https://edge.{}.cdo.cisco.com".format(os.getenv('ENV').lower())
         self.INSIGHTS_URL = self.BASE_URL + "/api/platform/ai-ops-insights/v1/insights"
         self.TENANT_ONBOARD_URL = self.BASE_URL + "/api/platform/ai-ops-orchestrator/v1/onboard/tenant"
-        self.TENANT_GCM_STACK_CONFIG_URL = self.BASE_URL + "/api/platform/ai-ops-tenant-services/v1/timeseries-stack"
+        self.DATA_INGEST_URL = self.BASE_URL + "/api/platform/ai-ops-data-ingest/v1/healthmetrics"
         self.PROMETHEUS_RANGE_QUERY_URL = self.BASE_URL + "/api/platform/ai-ops-data-query/v1/healthmetrics/queryRange"
         self.TRIGGER_MANAGER_URL = self.BASE_URL + "/api/platform/ai-ops-orchestrator/v1/trigger"
         self.FMC_DETAILS_URL = self.BASE_URL + "/aegis/rest/v1/services/targets/devices?q=deviceType:FMCE"
