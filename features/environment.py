@@ -32,6 +32,7 @@ def get_device_id(context):
     devices_details = get(url.DEVICES_DETAILS_URL)
     for device in devices_details:
         if 'metadata' in device.keys() and 'deviceRecordUuid' in device['metadata'].keys():
+            print(f"Found FTD device with UUID {device['metadata']['deviceRecordUuid']}")
             return device['metadata']['deviceRecordUuid']
     print("No FTD device found for the tenant. Returning a random UUID.")
     return "f5b1b3b0-0b3b-4b3b-8b3b-0b3b3b3b3b3b"
