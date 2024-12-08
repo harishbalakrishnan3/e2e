@@ -10,7 +10,11 @@ timeseries = {}
 
 url = Endpoints()
 
+
 def before_all(context):
+    # Initialize logging
+    context.config.setup_logging()
+
     # Creating an empty timeseries dictionary - this will be populated in the due course of test execution
     context.timeseries = timeseries
 
