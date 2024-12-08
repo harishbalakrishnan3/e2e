@@ -7,6 +7,7 @@ from features.steps.env import get_endpoints
 
 endpoints = get_endpoints()
 
+
 def get_insights():
     return get(endpoints.INSIGHTS_URL)
 
@@ -36,12 +37,13 @@ def get_onboard_status():
     return get(endpoints.TENANT_ONBOARD_URL)
 
 
-def get(endpoint):
+def get(endpoint, print_body=True):
     print(f"Sending GET request to {endpoint}")
     response = requests.get(endpoint, headers={"Content-Type": "application/json",
                                                "Authorization": "Bearer " + os.getenv('CDO_TOKEN')})
     response_payload = response.json()
-    print("Response: ", response_payload)
+    if print_body:
+        print("Response: ", response_payload)
     assert response.status_code == 200, f"GET request to {endpoint} failed with status code {response.status_code}"
     return response_payload
 

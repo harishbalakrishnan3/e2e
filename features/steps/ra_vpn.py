@@ -13,7 +13,7 @@ from mockseries.trend import LinearTrend
 from mockseries.utils import datetime_range
 
 from features.steps.cdo_apis import get, post
-from features.steps.env import Endpoints, Path
+from features.steps.env import get_endpoints, Path
 
 t = Template("""# HELP $metric_name $description
 # TYPE $metric_name gauge
@@ -70,7 +70,7 @@ def step_impl(context):
 
     query = "?query=" + metric_name + "&start=" + str(start_time_epoch) + "&end=" + str(
         end_time_epoch) + "&step=5m"
-    endpoint = Endpoints.PROMETHEUS_RANGE_QUERY_URL + query
+    endpoint = get_endpoints().PROMETHEUS_RANGE_QUERY_URL + query
 
     count = 0
     success = False
@@ -100,7 +100,7 @@ def step_impl(context):
     with open(trigger_payload_file, 'r') as file:
         payload = file.read()
 
-    post(Endpoints.TRIGGER_MANAGER_URL, payload)
+    post(get_endpoints().TRIGGER_MANAGER_URL, payload)
 
 
 def generate_timeseries():
@@ -132,7 +132,7 @@ def generate_timeseries():
 
 def get_device_id():
     # Get cdFMC UID
-    resp = get(Endpoints.FMC_DETAILS_URL)
+    resp = get(get_endpoints().FMC_DETAILS_URL)
     uid = ""
     for d in resp:
         uid = d['uid']
@@ -154,7 +154,7 @@ def get_device_id():
         }
     }
 
-    resp = post(Endpoints.DEVICE_GATEWAY_COMMAND_URL, json.dumps(req))
+    resp = post(get_endpoints().DEVICE_GATEWAY_COMMAND_URL, json.dumps(req))
     print(resp.json())
     resp_body = json.loads(resp.json()['data']['responseBody'])
 
